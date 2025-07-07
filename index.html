@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power of Light</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background-color: black;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      font-size: 10rem;
+      position: relative;
+      cursor: default;
+      text-shadow: 0 0 25px rgba(0, 255, 255, 0.6),
+                   0 0 50px rgba(0, 255, 255, 0.5);
+    }
+
+    .wrapper.hover-effect {
+      -webkit-mask-image: radial-gradient(circle 250px at var(--x) var(--y), white 0%, transparent 70%);
+      mask-image: radial-gradient(circle 250px at var(--x) var(--y), white 0%, transparent 70%);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      transition: -webkit-mask-image 0.1s, mask-image 0.1s;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper" id="text">Ghania</div>
+
+  <script>
+    const text = document.getElementById('text');
+
+    text.addEventListener('mouseenter', () => {
+      text.classList.add('hover-effect');
+    });
+
+    text.addEventListener('mouseleave', () => {
+      text.classList.remove('hover-effect');
+    });
+
+    text.addEventListener('mousemove', (e) => {
+      const rect = text.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      text.style.setProperty('--x', x + 'px');
+      text.style.setProperty('--y', y + 'px');
+    });
+  </script>
+</body>
+</html>
